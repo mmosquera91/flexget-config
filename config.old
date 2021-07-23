@@ -1,0 +1,33 @@
+web_server: yes
+
+tasks:
+  discover_series:
+    template: [ tv ]
+    discover:
+      what:
+        - next_series_episodes:
+            from_start: yes
+      from:
+        - piratebay: yes
+      interval: 1 hour
+
+templates:
+  global:
+    content_filter:
+      reject:
+        - password.txt
+        - '*.rar'
+        - '*.zip'
+      require:
+        - '*.avi'
+        - '*.mkv'
+        - '*.mp4'
+    plugin_priority:
+      piratebay: 140
+    retry_failed: true
+
+  tv:
+    transmission: yes
+    include: series.yml
+
+

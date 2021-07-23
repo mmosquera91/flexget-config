@@ -1,33 +1,113 @@
+variables: variables.yml
 web_server: yes
 
-tasks:
-  discover_series:
-    template: [ tv ]
-    discover:
-      what:
-        - next_series_episodes:
-            from_start: yes
-      from:
-        - piratebay: yes
-      interval: 1 hour
+### Templates
 
 templates:
-  global:
-    content_filter:
-      reject:
-        - password.txt
-        - '*.rar'
-        - '*.zip'
-      require:
-        - '*.avi'
-        - '*.mkv'
-        - '*.mp4'
-    plugin_priority:
-      piratebay: 140
-    retry_failed: true
+  anchors:
+    _trakt_credentials: &trakt_credentials
+      username: mmosquera91
+      account: mmosquera91@gmail.com
 
-  tv:
+    _movie_lookup: &movie_lookup
+      metainfo_movie: yes
+      imdb_lookup: yes
+      tmdb_lookup: yes
+
+    _tv_lookup: &tv_lookup
+      thetvdb_lookup: yes
+      trakt_lookup:
+        <<: *trakt_credentials
+
+  trakt_tv_list: &trakt_tv_list
+    trakt_list:
+      <<: *trakt_credentials
+      list: '{? trakt.tv_list ?}'
+      type: shows
+
+  trakt_tv4k_list: &trakt_tv4k_list
+    trakt_list:
+      <<: *trakt_credentials
+      list: '{? trakt.tv4k_list ?}'
+      type: shows
+
+  trakt_movie_list: &trakt_movie_list
+    trakt_list:
+      <<: *trakt_credentials
+      list: '{? trakt.movie_list ?}'
+      type: movies
+  global-settings:
     transmission: yes
-    include: series.yml
+    include:
+      - reject.yml
+    sort_by:
+      field: quality
+      reverse: yes
+    trakt_lookup:
+      <<: *trakt_credentials
+    if:
+      - trakt_collected: reject
+      - trakt_watched: reject
+    
+  tv-settings:
+    <<: *tv_lookup
+    content_size:
+      max: 10000
+      min: 500
+    sequence:
+      - configure_series:
+          from:
+            <<: *trakt_tv_list
+          settings:
+            exact: no
+            target: 1080p hdtv+
+            quality: 1080p webrip+
+            timeframe: 18 hours
+            propers: 2 days
+            identified_by: ep
+      - configure_series:
+          from:
+            <<: *trakt_tv4k_list
+          settings:
+            exact: no
+            quality: 2160p webrip+
+            propers: 2 days
+            identified_by: ep
+            
+  movie-settings:
+    imdb_lookup: yes
+    proper_movies: no
+    content_size:
+      min: 8000
+      max: 80000
+      strict: no
+    quality: 2160p webdl+ dts+ # hdr+ dts+
+    list_match:
+      from:
+        - movie_list: Movies
 
+### Tasks
 
+tasks:
+
+  search-tv:
+    priority: 10
+    template:
+      - global-settings
+      - tv-settings
+    discover:
+      what:
+        - next_series_episodes: yes
+      from:
+        - piratebay: yes
+        # - alpharatio:
+        #     <<: *alpharatio_credentials
+        #     category: [tvhd, tvuhd]
+        # - iptorrents: 
+        #     <<: *iptorrents_credentials
+        #     category: [22, 5, 99]
+        # - torrentleech: 
+        #     <<: *torrentleech_credentials
+        #     category: [32]
+      interval: 3 hours
+    cfscraper: yes
