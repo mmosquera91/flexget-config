@@ -109,7 +109,6 @@ tasks:
         # - torrentleech: 
         #     <<: *torrentleech_credentials
         #     category: [32]
-      interval: 3 hours
     cfscraper: yes
 
   trakt-fill-tv-list:
