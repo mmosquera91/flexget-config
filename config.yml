@@ -7,7 +7,7 @@ templates:
   anchors:
     _trakt_credentials: &trakt_credentials
       username: mmosquera91
-      account: mmosquera91@gmail.com
+      account: mmosquera91
 
     _movie_lookup: &movie_lookup
       metainfo_movie: yes
@@ -111,3 +111,24 @@ tasks:
         #     category: [32]
       interval: 3 hours
     cfscraper: yes
+
+  trakt-fill-tv-list:
+    priority: 20
+    trakt_list:
+      <<: *trakt_credentials
+      list: "{? trakt.tv_list ?}"
+      type: episodes
+    accept_all: yes
+    set_series_begin: yes
+    list_remove:
+      - trakt_list:
+          <<: *trakt_credentials
+          list: "{? trakt.tv_list ?}"
+          type: episodes
+    list_add:
+      - trakt_list:
+          <<: *trakt_credentials
+          list: "{? trakt.tv_list ?}"
+          type: shows
+    no_entries_ok: yes
+    seen: local

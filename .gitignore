@@ -2,3 +2,5 @@
 variables.yaml
 db-config-jobs.sqlite
 db-config.sqlite
+cached_resources/
+.config-lock
