@@ -1,0 +1,42 @@
+
+trakt:
+  account: mmosquera91@gmail.com
+  username: mmosquera91
+  tv_list: series
+  tv4k_list: series4k
+  movie_list: movies
+
+pushover:
+  user_key: 
+  api_key: 
+
+tl:
+  rss: 
+  rss_key: 
+  username: 
+  password: 
+  nickname: 
+
+td: 
+  rss: 
+  uid: 
+  cfduid: 
+  passkey: 
+  rss_key: 
+  nickname:
+
+ipt:
+  rss: 
+  passkey: 
+  uid: 
+  password: 
+  nickname:
+
+ar:
+  rss:
+  username: 
+  password:   
+  nickname: 
+  authkey: 
+  torrent_pass: 
+  invite_message:

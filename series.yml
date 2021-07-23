@@ -1,0 +1,10 @@
+series:
+  settings:
+    Default: &DEFAULT_SETTING
+      propers: 48 hours
+    Best:
+      <<: *DEFAULT_SETTING
+      quality: 1080p
+    Good:
+      <<: *DEFAULT_SETTING
+      quality: 720p

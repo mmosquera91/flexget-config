@@ -1,0 +1,5 @@
+*.log
+variables.yaml
+
+db-config-jobs.sqlite
+db-config.sqlite
