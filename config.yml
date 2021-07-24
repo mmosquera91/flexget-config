@@ -97,7 +97,8 @@ tasks:
       - tv-settings
     discover:
       what:
-        - next_series_episodes: yes
+        - next_series_episodes:
+            from_start: yes
       from:
         - piratebay: yes
         # - alpharatio:
