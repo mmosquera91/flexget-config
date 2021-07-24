@@ -51,17 +51,17 @@ templates:
     
   tv-settings:
     <<: *tv_lookup
-    content_size:
-      max: 10000
-      min: 500
+    # content_size:
+    #   max: 10000
+    #   min: 500
     sequence:
       - configure_series:
           from:
             <<: *trakt_tv_list
           settings:
             exact: no
-            target: 1080p hdtv+
-            quality: 1080p webrip+
+            target: 720p hdtv+
+            quality: 720p webrip+
             timeframe: 18 hours
             propers: 2 days
             identified_by: ep
@@ -70,7 +70,7 @@ templates:
             <<: *trakt_tv4k_list
           settings:
             exact: no
-            quality: 2160p webrip+
+            quality: 1080p webrip+
             propers: 2 days
             identified_by: ep
             
@@ -110,7 +110,7 @@ tasks:
         # - torrentleech: 
         #     <<: *torrentleech_credentials
         #     category: [32]
-    cfscraper: yes
+    # cfscraper: yes
 
   trakt-fill-tv-list:
     priority: 20
