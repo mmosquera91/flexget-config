@@ -119,15 +119,48 @@ tasks:
       type: episodes
     accept_all: yes
     set_series_begin: yes
-    list_remove:
-      - trakt_list:
-          <<: *trakt_credentials
-          list: "{? trakt.tv_list ?}"
-          type: episodes
+    # list_remove:
+    #   - trakt_list:
+    #       <<: *trakt_credentials
+    #       list: "{? trakt.tv_list ?}"
+    #       type: episodes
     list_add:
       - trakt_list:
           <<: *trakt_credentials
           list: "{? trakt.tv_list ?}"
           type: shows
     no_entries_ok: yes
+    # seen: local
+
+trakt-fill-tv4k-list:
+    priority: 20
+    trakt_list:
+      <<: *trakt_credentials
+      list: "{? trakt.tv4k_list ?}"
+      type: episodes
+    accept_all: yes
+    set_series_begin: yes
+    # list_remove:
+    #   - trakt_list:
+    #       <<: *trakt_credentials
+    #       list: "{? trakt.tv4k_list ?}"
+    #       type: episodes
+    list_add:
+      - trakt_list:
+          <<: *trakt_credentials
+          list: "{? trakt.tv4k_list ?}"
+          type: shows
+    no_entries_ok: yes
     seen: local
+
+  # test:
+  #   trakt_list:
+  #     account: mmosquera91
+  #     list: series4k
+  #     type: shows
+  #   accept_all: yes
+  #   list_add:
+  #     - trakt_list:
+  #         username: a_different_username
+  #         list: watchlist
+  #         type: movies
