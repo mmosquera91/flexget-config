@@ -117,7 +117,7 @@ tasks:
     trakt_list:
       <<: *trakt_credentials
       list: "{? trakt.tv_list ?}"
-      type: shows
+      type: episodes
     accept_all: yes
     set_series_begin: yes
     list_remove:
@@ -138,14 +138,14 @@ tasks:
     trakt_list:
       <<: *trakt_credentials
       list: "{? trakt.tv4k_list ?}"
-      type: shows
+      type: episodes
     accept_all: yes
     set_series_begin: yes
-    list_remove:
-      - trakt_list:
-          <<: *trakt_credentials
-          list: "{? trakt.tv4k_list ?}"
-          type: episodes
+    # list_remove:
+    #   - trakt_list:
+    #       <<: *trakt_credentials
+    #       list: "{? trakt.tv4k_list ?}"
+    #       type: episodes
     list_add:
       - trakt_list:
           <<: *trakt_credentials
