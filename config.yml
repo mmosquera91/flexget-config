@@ -132,7 +132,7 @@ tasks:
     no_entries_ok: yes
     # seen: local
 
-trakt-fill-tv4k-list:
+  trakt-fill-tv4k-list:
     priority: 20
     trakt_list:
       <<: *trakt_credentials
