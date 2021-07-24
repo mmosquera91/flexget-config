@@ -116,7 +116,7 @@ tasks:
     trakt_list:
       <<: *trakt_credentials
       list: "{? trakt.tv_list ?}"
-      type: episodes
+      type: shows
     accept_all: yes
     set_series_begin: yes
     # list_remove:
